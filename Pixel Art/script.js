@@ -29,7 +29,7 @@ function randomColors() {
 
 function createCollorsIntoPallete() {
   const selectorDiv = document.getElementById('color-palette');
-  const arrayDiv = ['black', randomColors(), randomColors(), randomColors()];
+  const arrayDiv = ['black', 'white', 'red', 'blue', 'green', 'yellow', randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors(), randomColors()];
   for (let index = 0; index < arrayDiv.length; index += 1) {
     const createDiv = document.createElement('div');
     createDiv.className = 'color';
@@ -48,7 +48,7 @@ function createPixelTable() {
   createDiv.id = 'pixel-board';
   createDiv.style.border = 'solid 1px black';
   createDiv.style.display = 'block';
-  createDiv.style.maxWidth = '210px';
+  createDiv.style.maxWidth = '100px';
   createDiv.style.display = 'block';
   selectorBody.appendChild(createDiv);
 }
@@ -60,9 +60,8 @@ function createPixelTableLineElements() {
     const createDiv = document.createElement('div');
     createDiv.className = 'pixel';
     createDiv.style.backgroundColor = 'white';
-    createDiv.style.height = '40px';
-    createDiv.style.width = '40px';
-    createDiv.style.border = 'solid 1px black';
+    createDiv.style.height = '20px';
+    createDiv.style.width = '20px';
     createDiv.style.display = display;
     selectorDivPixelBoard.appendChild(createDiv);
   }
@@ -187,7 +186,7 @@ function makePixels(value) {
   for (let index = 1; index <= value; index += 1) {
     for (let index1 = 1; index1 <= value; index1 += 1) {
       const createDiv = document.createElement('div');
-      selectorDivPixelBoard.style.maxWidth = `${parseInt(value, 10) * 42}px`;
+      selectorDivPixelBoard.style.maxWidth = `${parseInt(value, 10) * 20}px`;
       createDiv.className = 'pixel';
       createDiv.style.backgroundColor = 'white';
       selectorDivPixelBoard.appendChild(createDiv);

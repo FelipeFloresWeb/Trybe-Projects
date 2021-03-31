@@ -3,25 +3,42 @@
   padding: 0;
 }
 
+h1 {
+  text-align: center;
+}
+
 #color-palette {
-  max-width: 250px;
+  max-width: 450px;
+  display: block;
+  margin: auto;
+}
+
+#board-size {
+  justify-content: center;
+  margin-left: 44%;
+  
 }
 
 body {
   align-items: center;
+  background-image: url(background.jpeg);
+  background-size: 60%;
+}
+
+#pixel-board {
+  margin: auto;
 }
 
 .pixel {
   background-color: 'white';
-  height: 40px;
-  width: 40px;
-  border: 1px solid black;
+  height: 20px;
+  width: 20px;
   display: inline-block;
 }
 
 .color {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   border: solid 1px black;
 }
 
