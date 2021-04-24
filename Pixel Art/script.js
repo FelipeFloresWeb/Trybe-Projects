@@ -8,7 +8,7 @@ function createh1() {
   const createH1 = document.createElement('h1');
   const selectorBody = document.querySelector('body');
   createH1.id = 'title';
-  createH1.innerHTML = 'Paleta de Cores';
+  createH1.innerHTML = 'Pixel Art';
   selectorBody.appendChild(createH1);
 }
 createh1();
@@ -24,7 +24,7 @@ function createCollorPalette() {
 createCollorPalette();
 
 function randomColors() {
-  return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+  return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
 
 function createCollorsIntoPallete() {
@@ -58,10 +58,12 @@ function createPixelTableLineElements() {
   for (let index = 1; index <= 25; index += 1) {
     const selectorDivPixelBoard = document.querySelector(selectIdPixelBoard);
     const createDiv = document.createElement('div');
+    selectorDivPixelBoard.style.maxWidth = `${parseInt(6, 10) * 18.5}px`;
     createDiv.className = 'pixel';
     createDiv.style.backgroundColor = 'white';
     createDiv.style.height = '20px';
     createDiv.style.width = '20px';
+    createDiv.style.border = 'solid 1px black'
     createDiv.style.display = display;
     selectorDivPixelBoard.appendChild(createDiv);
   }
@@ -152,7 +154,7 @@ function createButtonVQV() {
   const selectorBody = document.querySelector('body');
   const createButton = document.createElement('button');
   createButton.id = 'generate-board';
-  createButton.innerHTML = 'VQV';
+  createButton.innerHTML = 'Ajustar tamanho do quadro';
   selectorBody.insertBefore(createButton, selectButton);
 }
 createButtonVQV();
@@ -163,6 +165,7 @@ function createInputNumber() {
   const createInput = document.createElement('input');
   createInput.id = 'board-size';
   createInput.type = 'number';
+  createInput.placeholder = 'min "5 máx "50"';
   createInput.min = '1';
   createInput.max = '50';
   selectorBody.insertBefore(createInput, selectGenerateBoard);
@@ -172,7 +175,7 @@ createInputNumber();
 function checkInput() {
   const selectInput = document.querySelector('#board-size');
   if (selectInput.value === '') {
-    alert('Board inválido!');
+    alert('Board inválido! Selecione algum valor no input ao lado.');
   }
   if (selectInput.value > 50) {
     selectInput.value = 50;
@@ -186,8 +189,10 @@ function makePixels(value) {
   for (let index = 1; index <= value; index += 1) {
     for (let index1 = 1; index1 <= value; index1 += 1) {
       const createDiv = document.createElement('div');
-      selectorDivPixelBoard.style.maxWidth = `${parseInt(value, 10) * 20}px`;
+      selectorDivPixelBoard.style.maxWidth = `${parseInt(value, 10) * 22}px`;
       createDiv.className = 'pixel';
+      createDiv.classList.add('removed');
+      createDiv.style.border = 'solid 1px black'
       createDiv.style.backgroundColor = 'white';
       selectorDivPixelBoard.appendChild(createDiv);
     }
@@ -212,3 +217,58 @@ function createDivsBonus() {
   selectButton.addEventListener('click', generatePixels);
 }
 createDivsBonus();
+
+const createButtonRemoveBords = () => {
+  const selectorBody = document.body
+  const selectButtonClear = document.querySelector('#clear-board');
+  const selectDivPixelBoard = document.querySelector('#pixel-board')
+  const createButton = document.createElement('button');
+  createButton.innerHTML = 'Bordas ON / Off';
+  createButton.id = "clearButton"
+  createButton.addEventListener('click', () => {
+    const selectInput = document.querySelector('#board-size');
+    const selectDivPixel = document.querySelectorAll('.pixel');
+    if (selectDivPixelBoard.classList.contains('removed')) {
+      const value = selectInput.value
+      selectDivPixelBoard.classList.remove('removed');
+      selectDivPixelBoard.style.maxWidth = `${parseInt(value, 10) * 22}px`;
+      for (let index = 1; index <= value; index += 1) {
+        for (let index1 = 1; index1 <= value; index1 += 1) {
+          const createDiv = document.createElement('div');
+          createDiv.style.backgroundColor = 'white';
+          selectDivPixelBoard.appendChild(createDiv);
+        }
+      }
+      selectDivPixel.forEach((div) => {
+        div.style.border = 'solid 1px black';
+      });
+    } else {
+      const value = selectInput.value
+      selectDivPixelBoard.classList.add('removed');
+      selectDivPixelBoard.style.maxWidth = `${parseInt(value, 10) * 20}px`;
+      selectDivPixel.forEach((div) => {
+        div.style.border = 'none';
+      });
+    }
+  })
+  selectorBody.insertBefore(createButton, selectButtonClear);
+};
+
+createButtonRemoveBords();
+
+const changeCollorsPalette = () => {
+  const selectDivColorPalette = document.querySelector('#color-palette');
+  const createButton = document.createElement('button');
+  createButton.innerHTML = 'Mudar Cores'
+  createButton.id = 'changeCollors';
+  createButton.addEventListener('click', () => {
+    const selectColors = document.querySelectorAll('.color');
+    for (let index = 6; index < selectColors.length; index += 1) {
+      selectColors[index].style.backgroundColor = randomColors();
+    }
+  });
+  selectDivColorPalette.appendChild(createButton);
+
+};
+
+changeCollorsPalette();
